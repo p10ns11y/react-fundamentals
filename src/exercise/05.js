@@ -12,15 +12,65 @@ import '../box-styles.css'
 
 // 🐨 add a style prop to each of them as well so their background color
 // matches what the text says it should be as well as `fontStyle: 'italic'`
-const smallBox = <div>small lightblue box</div>
-const mediumBox = <div>medium pink box</div>
-const largeBox = <div>large orange box</div>
+// const smallBox = (
+//   <div
+//     className="box box--small"
+//     style={{backgroundColor: 'lightblue', fontStyle: 'italic'}}
+//   >
+//     small lightblue box
+//   </div>
+// )
+// const mediumBox = (
+//   <div
+//     className="box box--medium"
+//     style={{backgroundColor: 'pink', fontStyle: 'italic'}}
+//   >
+//     medium pink box
+//   </div>
+// )
+const largeBox = (
+  <div
+    className="box box--large"
+    style={{backgroundColor: 'orange', fontStyle: 'italic'}}
+  >
+    large orange box
+  </div>
+)
+
+function Box({className = '', style, children}) {
+  return (
+    <div className={`box ${className}`} style={{...style, fontStyle: 'italic'}}>
+      {children}
+    </div>
+  )
+}
+
+function BetterBox({size, style, children}) {
+  const classes = {
+    small: 'box--small',
+    medium: 'box--medium',
+    large: 'box--large',
+  }
+
+  return (
+    <div
+      className={`box ${classes[size]}`}
+      style={{...style, fontStyle: 'italic'}}
+    >
+      {children}
+    </div>
+  )
+}
 
 function App() {
   return (
     <div>
-      {smallBox}
-      {mediumBox}
+      <Box className="box--small" style={{backgroundColor: 'lightblue'}}>
+        small lightblue box
+      </Box>
+      <BetterBox size="medium" style={{backgroundColor: 'pink'}}>
+        medium pink box
+      </BetterBox>
       {largeBox}
     </div>
   )
